@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware(['auth']);
+Route::group(['middleware' => ['auth']], function () {
+	Route::get('/', function () {
+		return view('welcome');
+	});
+	Route::resource('/companies', 'CompanyController')->except(['show']);
+	Route::resource('/employees', 'EmployeeController')->except(['show']);
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('home', 'home')->name('home');
