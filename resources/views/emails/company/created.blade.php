@@ -1,0 +1,1 @@
+<p>Company «{{ $company->name }}» was created</p>
