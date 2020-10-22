@@ -36,17 +36,26 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(function () {
             return view('auth.login');
         });
-        
+    
+        Fortify::authenticateUsing(function (Request $request) {
+            // I spent a long time debugging this error
+            $user = User::where('email', $request->email)->first();
+            if ($user &&
+                Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+        });
+    
         Fortify::registerView(function () {
             return view('auth.register');
         });
-        
-        Fortify::requestPasswordResetLinkView(function () {
-            return view('auth.forgot-password');
+    
+        Fortify::resetPasswordView(function ($request) {
+            return view('auth.passwords.reset', ['request' => $request]);
         });
-        
-        Fortify::resetPasswordView(function () {
-            return view('auth.reset-password');
+    
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify');
         });
     }
 }
