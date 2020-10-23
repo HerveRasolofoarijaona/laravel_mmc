@@ -8,7 +8,7 @@ use App\Services\CompanyService;
 
 class CompanyController extends Controller
 {
-    /**
+	/**
 	 * @var CompanyService
 	 */
 	private $companyService;

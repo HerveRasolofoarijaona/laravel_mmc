@@ -2,11 +2,22 @@
 
 namespace App\Providers;
 
+use App\Models\Company;
+use App\Observers\CompanyObserver;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+		Company::observe(CompanyObserver::class);
+    }
+
     /**
      * Register any application services.
      *
@@ -15,15 +26,5 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        Schema::defaultstringLength(191);
     }
 }

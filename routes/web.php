@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,14 +11,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes(['register' => false]);
+
+Route::get('/set_locale/{locale}', 'LanguageController@set')->name('set_locale');
+
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/', function () {
 		return view('welcome');
 	});
 	Route::resource('/companies', 'CompanyController')->except(['show']);
 	Route::resource('/employees', 'EmployeeController')->except(['show']);
-});
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('home', 'home')->name('home');
 });

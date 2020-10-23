@@ -9,7 +9,7 @@ use App\Services\EmployeeService;
 
 class EmployeeController extends Controller
 {
-    /**
+	/**
 	 * @var EmployeeService
 	 */
 	private $employeeService;
